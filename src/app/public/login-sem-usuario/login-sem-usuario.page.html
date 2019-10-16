@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>So Precisamos de Algumas Informações</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <form #form="ngForm" (ngSubmit)="regForm(form)">
+      <ion-item-divider>USUARIO</ion-item-divider><br>
+      <ion-label>Nome: </ion-label>
+      <ion-input name="nome" value="" class="inputLoginPage" required type="text" ngModel ngControl="nome"></ion-input><br>
+      <ion-label>Celular: </ion-label>
+      <ion-input name="celular" value="" class="inputLoginPage" required type="text" ngModel ngControl="celular"></ion-input><br>
+      <ion-label>Email: </ion-label>
+      <ion-input name="email" value="" class="inputLoginPage" required type="email" ngModel ngControl="email"></ion-input><br>
+      <ion-label>Senha: </ion-label>
+      <ion-input name="senha" value="" class="inputLoginPage" required type="password" ngModel ngControl="senha"></ion-input><br>
+      <ion-label>Confirmar Senha: </ion-label>
+      <ion-input name="confsenha" value="" class="inputLoginPage" required type="password" ngModel ngControl="confsenha"></ion-input><br>
+      <br><br><ion-item-divider>CARRO</ion-item-divider><br>
+      <ion-label>Placa: </ion-label>
+      <ion-input name="placa" value="" class="inputLoginPage" required type="text" ngModel ngControl="placa"></ion-input><br>
+      <ion-label>Modelo: </ion-label>
+      <ion-input name="modelo" value="" class="inputLoginPage" required type="text" ngModel ngControl="modelo"></ion-input><br>
+      <ion-label>Chassi: </ion-label>
+      <ion-input name="chassi" value="" class="inputLoginPage" required type="text" ngModel ngControl="chassi"></ion-input><br>
+      <ion-label>Proprietario: </ion-label>
+      <ion-input name="proprietario" value="" class="inputLoginPage" required type="text" ngModel ngControl="proprietario"></ion-input><br>
+      <ion-label>Marca: </ion-label>
+      <ion-input name="marca" value="" class="inputLoginPage" required type="text" ngModel ngControl="marca"></ion-input><br>
+      <ion-label>Cor: </ion-label>
+      <ion-input name="cor" value="" class="inputLoginPage" required type="text" ngModel ngControl="cor"></ion-input><br>
+      <ion-item-divider></ion-item-divider><br>
+      <ion-list class="listTipoLogin">
+        <ion-radio-group #radioGroup>
+          <ion-list-header>
+            <ion-label>Possui Nescessidades Especiais?</ion-label>
+          </ion-list-header>
+        
+          <ion-item lines="none">
+            <ion-label>SIM</ion-label>
+            <ion-radio slot="start" value="S" checked></ion-radio>
+          </ion-item>
+        
+          <ion-item lines="none">
+            <ion-label>NÃO</ion-label>
+            <ion-radio slot="start" value="N"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list><br>
+      <ion-list>
+        <ion-list-header>Single Selection</ion-list-header>
+        
+        <ion-item>
+          <ion-label>TIPO DE VEICULO</ion-label>
+          <ion-select placeholder="SELECIONE UMA OPÇÃO" #selectTipoCarro>
+            <ion-select-option value="carro">CARRO</ion-select-option>
+            <ion-select-option value="moto">MOTO</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <ion-button color="success" expand="block" type="submit">CRIAR CONTA TEMPORARIA</ion-button>
+      </form>
+      <ion-button color="danger" expand="block" [routerLink]="['/login']">VOLTAR</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "frontEndApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

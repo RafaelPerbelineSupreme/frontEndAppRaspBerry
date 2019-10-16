@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-title text-center>CONTA</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title text-center>Informações de Cadastro</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>Usuario: </ion-label>
+      <ion-input value="" class="inputVeiculo" readonly></ion-input><br>
+      <ion-label>Senha: </ion-label>
+      <ion-input value="" class="inputVeiculo" readonly></ion-input><br>
+      <ion-label>Nome: </ion-label>
+      <ion-input value="" class="inputVeiculo" readonly></ion-input><br>
+      <ion-label>Celular: </ion-label>
+      <ion-input value="" class="inputVeiculo" readonly></ion-input><br>
+      <ion-label>CPF: </ion-label>
+      <ion-input value="" class="inputVeiculo" readonly></ion-input><br>
+      <ion-label>Requer Vaga Especial?: </ion-label>
+      <ion-input value="" class="inputVeiculo" readonly></ion-input><br>
+      <ion-button color="dark" expand="block">EDITAR INFORMAÇÕES</ion-button>
+      <!--<ion-select placeholder="" [interfaceOptions]="customPopoverOptions" interface="popover">
+        <ion-select-option value="sim">Sim</ion-select-option>
+        <ion-select-option value="nao">Não</ion-select-option>
+      </ion-select>-->
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title text-center>Informações de Pagamento</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-segment (ionChange)="segmentChanged($event)" color="dark" value="cartao">
+        <ion-segment-button href="#" value="cartao">
+          <ion-label>Cartão</ion-label>
+        </ion-segment-button>
+        <ion-segment-button href="#" value="aVista">
+          <ion-label>A Vista</ion-label>
+        </ion-segment-button>
+      </ion-segment><br>
+      <div *ngIf="valorSeg === 'cartao'" >
+        <ion-label>Numero do Cartão: </ion-label>
+        <ion-input value="" class="inputVeiculo"></ion-input><br>
+        <ion-label>Titular: </ion-label>
+        <ion-input value="" class="inputVeiculo"></ion-input><br>
+        <ion-label>Vencimento: </ion-label>
+        <ion-input value="" class="inputVeiculo"></ion-input><br>
+        <ion-label>CVC: </ion-label>
+        <ion-input value="" class="inputVeiculo"></ion-input><br>
+      </div>
+
+      <div *ngIf="valorSeg === 'aVista'" >
+        <ion-label>Valor a Pagar: </ion-label>
+        <ion-input value="" class="inputVeiculo" readonly></ion-input><br>
+      </div>
+
+      <ion-button color="success" expand="block" fill="outline" *ngIf="valorSeg === 'cartao'">PAGAR</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

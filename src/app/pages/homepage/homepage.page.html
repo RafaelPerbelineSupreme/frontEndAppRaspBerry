@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-title text-center>SMART PARKING</ion-title>
+    <ion-button color="danger" float-right (click)="Logout()"><ion-icon name="log-out"></ion-icon>Logout</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title text-center>Mapemento das Vagas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title text-center>Vagas Disponiveis</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div *ngFor="let item of collection" class="itemVagas">
+        <ion-item lines="none">
+          <ion-label>
+            <h1 text-center>Nome do Local</h1>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <h3>Preço</h3>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <h3>Disponibilidade</h3>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-button color="primary" shape="round" [routerLink]="['/info-vagas', item]"><ion-icon name="information-circle-outline"></ion-icon>Veja Mais</ion-button>
+        </ion-item>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
