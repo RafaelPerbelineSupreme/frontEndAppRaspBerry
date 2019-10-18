@@ -5,6 +5,7 @@ import { StorageService } from '../../services/storage.service';
 import { Usuarios } from '../../shared/usuarios.class';
 import { ContaTemporariaService } from '../../services/conta-temporaria.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-sem-usuario',
@@ -55,18 +56,19 @@ export class LoginSemUsuarioPage implements OnInit {
     else if(this.radioGroup.value === "N"){
       console.log("Não")
     }
-
+    
     this.email = form.value.email;
     this.senha = form.value.senha;
     this.confSenha = form.value.confsenha;
 
     console.log("user:"+this.email, "senha:"+this.senha, "confsenha:"+this.confSenha);
 
-    const { email, senha, confSenha} = this;
+    const { email, senha, confSenha} = this
 
     if(senha != confSenha){
       return this.showToast("SENHAS NÃO SÃO IGUAIS");
     }
+
     this.addUser(form.value.nome, form.value.celular, form.value.email, form.value.senha, form.value.placa, form.value.modelo, form.value.chassi, form.value.proprietario, form.value.marca, form.value.cor, this.selectTipoCarro.value, this.radioGroup.value, email, senha);
   }
 

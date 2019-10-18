@@ -7,7 +7,7 @@
 <ion-content>
   <ion-card>
     <ion-card-content>
-      <form #form="ngForm" (ngSubmit)="regForm(form)">
+      <form #form="ngForm" (ngSubmit)="regForm(form)" novalidate>
       <ion-item-divider>USUARIO</ion-item-divider><br>
       <ion-label>Nome: </ion-label>
       <ion-input name="nome" value="" class="inputLoginPage" required type="text" ngModel ngControl="nome"></ion-input><br>
@@ -15,8 +15,10 @@
       <ion-input name="celular" value="" class="inputLoginPage" required type="text" ngModel ngControl="celular"></ion-input><br>
       <ion-label>Email: </ion-label>
       <ion-input name="email" value="" class="inputLoginPage" required type="email" ngModel ngControl="email"></ion-input><br>
+      <h6 *ngIf="errorEmail" class="error"> {{messageEmail}}</h6>
       <ion-label>Senha: </ion-label>
       <ion-input name="senha" value="" class="inputLoginPage" required type="password" ngModel ngControl="senha"></ion-input><br>
+      <h6 *ngIf="errorPassword" class="error"> {{messagePassword}}</h6>
       <ion-label>Confirmar Senha: </ion-label>
       <ion-input name="confsenha" value="" class="inputLoginPage" required type="password" ngModel ngControl="confsenha"></ion-input><br>
       <br><br><ion-item-divider>CARRO</ion-item-divider><br>

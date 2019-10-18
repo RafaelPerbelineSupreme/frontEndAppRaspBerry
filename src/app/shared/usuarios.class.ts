@@ -13,6 +13,7 @@ export class Usuarios {
     proprietario: string;
     marca: string;
     cor: string;
+    isActivate: boolean;
     tipoVeiculo: string;
     create_at: string;
 }
