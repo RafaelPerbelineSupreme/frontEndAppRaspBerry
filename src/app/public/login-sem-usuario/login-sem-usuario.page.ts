@@ -87,6 +87,7 @@ export class LoginSemUsuarioPage implements OnInit {
     this.newUser.tipoVeiculo = tipoVeiculo;
     this.newUser.vgaEspecial = vagaEspecial;
     this.newUser.tipoUsuario = 'CONTA TEMPORARIA';
+    this.newUser.isActivate = true;
     let date = new Date();
     console.log(date.toLocaleString()); 
     this.newUser.create_at = date.toLocaleString();
@@ -99,7 +100,28 @@ export class LoginSemUsuarioPage implements OnInit {
           console.log("entrou trycatch");
           //const res = await this.afAuth.auth.createUserWithEmailAndPassword(email, senha);
           //console.log(res);
-          this.RegisterAuthFirebase(emailAtuh, senhaAuth);
+          const user = await this.authService.onRegister(email, senha);
+          console.log(user);
+          console.log(user.__proto__);
+          console.log(user.__proto__.__proto__.name);
+          console.log(user.code);
+          
+          if(user.__proto__.__proto__.name === "Error"){
+            if(user.code === "auth/invalid-email"){
+              console.log("auth/invalid-email");
+              return this.showToast("EMAIL INVALIDO");
+            }
+            else if(user.code  === "auth/weak-password"){
+              console.log("auth/weak-password");
+              return this.showToast("SENHA MUITO FRACA, ACIMA DE 6 CARACTERES");
+            }
+            else if(user.code  === "auth/email-already-in-use"){
+              return this.showToast("EMAIL JA ESTA EM USO");
+            }
+          }
+          else{
+            console.log("usuario criado com sucesso");
+          
           this.createUserFirebase(this.newUser);
           this.storageService.addUser(this.newUser).then(user => {
             this.newUser = <Usuarios>{};
@@ -109,6 +131,8 @@ export class LoginSemUsuarioPage implements OnInit {
             console.log("Erro De Adicionar Usuario"+error);
           });
           this.router.navigateByUrl('/');
+
+          }
         } catch (error) {
           console.log("Erro Do Auth Firebase "+error);
         }
@@ -134,12 +158,8 @@ export class LoginSemUsuarioPage implements OnInit {
     })
   }
 
-  async RegisterAuthFirebase(email: string, senha: string){
-    const user = await this.authService.onRegister(email, senha);
-    if(user){
-      console.log("usuario criado com sucesso");
-    }
-  }
+  /*async RegisterAuthFirebase(email: string, senha: string){
+  }*/
 
   async showToast(msg){
     const toast = await this.toastController.create({

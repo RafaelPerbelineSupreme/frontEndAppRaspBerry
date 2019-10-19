@@ -5,13 +5,14 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyCXgNIAkQKOB8hJxQCg8pP2QkybLyVPBNs",
-    authDomain: "smartparking-5aea8.firebaseapp.com",
-    databaseURL: "https://smartparking-5aea8.firebaseio.com",
-    projectId: "smartparking-5aea8",
-    storageBucket: "smartparking-5aea8.appspot.com",
-    messagingSenderId: "142809518258",
-    appId: "1:142809518258:web:cf48f168caa988a43bf9ab"
+    apiKey: "AIzaSyCDWiZ972i5oG_CACiDbl4S3cRA9QzFmXw",
+    authDomain: "frontendionicapp-44971.firebaseapp.com",
+    databaseURL: "https://frontendionicapp-44971.firebaseio.com",
+    projectId: "frontendionicapp-44971",
+    storageBucket: "frontendionicapp-44971.appspot.com",
+    messagingSenderId: "187770671549",
+    appId: "1:187770671549:web:787014128ce6f53e3e82d4",
+    measurementId: "G-WHMNN5N7NF"
   }
 };
 

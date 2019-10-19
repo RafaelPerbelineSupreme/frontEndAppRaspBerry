@@ -37,6 +37,10 @@ export class ContaTemporariaService {
   getUsuariosId(id) {
     return this.usuariosCollection.doc<Usuarios>(id).valueChanges();
   }
+
+  getUsuariosEmail(id) {
+    return this.usuariosCollection.doc<Usuarios>(id).valueChanges();
+  }
  
   updateUsuarios(usuarios: Usuarios, id: string) {
     return this.usuariosCollection.doc(id).update(usuarios);
