@@ -16,8 +16,8 @@ export class ContaTemporariaService {
   
   private usuarios: Observable<Usuarios[]>;
 
-  constructor(db: AngularFirestore) { 
-    this.usuariosCollection = db.collection<Usuarios>('usuarios');
+  constructor(private db: AngularFirestore) { 
+    this.usuariosCollection = this.db.collection<Usuarios>('usuarios');
     
     this.usuarios = this.usuariosCollection.snapshotChanges().pipe(
       map(actions => {
@@ -38,8 +38,8 @@ export class ContaTemporariaService {
     return this.usuariosCollection.doc<Usuarios>(id).valueChanges();
   }
 
-  getUsuariosEmail(id) {
-    return this.usuariosCollection.doc<Usuarios>(id).valueChanges();
+  getUsuariosEmail(email) {
+    return this.db.collection<Usuarios>("usuarios", ref => ref.where('email', '==', email).where('isActivate', '==', 'true')).valueChanges();
   }
  
   updateUsuarios(usuarios: Usuarios, id: string) {
