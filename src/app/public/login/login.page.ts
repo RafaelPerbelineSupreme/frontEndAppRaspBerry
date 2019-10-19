@@ -34,6 +34,10 @@ export class LoginPage implements OnInit {
     this.storageService.getUser().then(async users => {
       if (users === null || users === undefined || !users){
         console.log("storage não existe");
+        let userEmail = await this.contaTemporariaService.getUsuariosEmail(form.value.usuario).toPromise(userEmail => {
+          console.log(userEmail);
+        });
+        
       }
       else{
         console.log("storage existe " + users);
