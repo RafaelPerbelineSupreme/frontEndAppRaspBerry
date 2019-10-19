@@ -30,10 +30,19 @@ export class LoginPage implements OnInit {
       console.log("ADM || GRT")
     }*/
     const user = await this.authService.onLogin(form.value.usuario, form.value.senha)
-    if(user){
-      this.showToast("Login Realizado com Sucesso!!!");
-      this.router.navigateByUrl('/tabs/homepage');
+    console.log(user);
+    if(user === "auth/invalid-email"){
+      return this.showToast("CONTA INVALIDA!!!");
     }
+    else if(user === "auth/user-disabled"){
+      return this.showToast("USUARIO FOI DISABILITADO!!!");
+    }
+    else if(user === "auth/wrong-password"){
+      return this.showToast("SENHA ERRADA!!!");
+    }
+
+    this.showToast("Login Realizado com Sucesso!!!");
+    this.router.navigateByUrl('/tabs/homepage');
   }
 
   async showToast(msg){

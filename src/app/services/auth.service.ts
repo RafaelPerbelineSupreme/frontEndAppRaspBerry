@@ -16,7 +16,7 @@ export class AuthService {
       return await this.afAuth.auth.signInWithEmailAndPassword(email, senha)
     } catch (error) {
       console.log("Erro Login: "+error);
-      return error;
+      return error.code;
     }
   }
 
@@ -26,7 +26,7 @@ export class AuthService {
       return await this.afAuth.auth.createUserWithEmailAndPassword(email, senha);
     } catch (error) {
       console.log("Erro de Registro: "+error)
-      return error;
+      return error.code;
     }
   }
 }

@@ -18,6 +18,8 @@ export class LoginSemUsuarioPage implements OnInit {
 
   newUser: Usuarios = <Usuarios>{};
 
+  date: Date = null;
+
   email:string = "";
   senha:string = "";
   confSenha: string = "";
@@ -46,8 +48,8 @@ export class LoginSemUsuarioPage implements OnInit {
     console.log(form.value.proprietario);
     console.log(form.value.marca);
     console.log(form.value.cor);
-    let date = new Date();
-    console.log(date.toLocaleString());
+   // this.date = new Date();
+    //console.log(this.date.toLocaleString());
     console.log(this.radioGroup.value);
     console.log("teste "+this.selectTipoCarro.value);
     if(this.radioGroup.value === "S"){
@@ -69,28 +71,24 @@ export class LoginSemUsuarioPage implements OnInit {
       return this.showToast("SENHAS NÃO SÃO IGUAIS");
     }
 
-    this.addUser(form.value.nome, form.value.celular, form.value.email, form.value.senha, form.value.placa, form.value.modelo, form.value.chassi, form.value.proprietario, form.value.marca, form.value.cor, this.selectTipoCarro.value, this.radioGroup.value, email, senha);
-  }
-
-  addUser(nome: string, celular:string, email:string, senha:string, placa:string, modelo: string, chassi:string, proprietario:string, marca:string, cor:string, tipoVeiculo: string, vagaEspecial: string, emailAtuh: string, senhaAuth: string){
     this.newUser.idUser = this.randomString(80,'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-    this.newUser.nome = nome;
-    this.newUser.celular = celular;
+    this.newUser.nome = form.value.nome;
+    this.newUser.celular = form.value.celular;
     this.newUser.email = email;
     this.newUser.senha = senha;
-    this.newUser.placaCarro = placa;
-    this.newUser.modelo = modelo;
-    this.newUser.chassi = chassi;
-    this.newUser.proprietario = proprietario;
-    this.newUser.marca = marca;
-    this.newUser.cor = cor;
-    this.newUser.tipoVeiculo = tipoVeiculo;
-    this.newUser.vgaEspecial = vagaEspecial;
+    this.newUser.placaCarro = form.value.placa;
+    this.newUser.modelo = form.value.modelo;
+    this.newUser.chassi = form.value.chassi;
+    this.newUser.proprietario = form.value.proprietario;
+    this.newUser.marca = form.value.marca;
+    this.newUser.cor = form.value.cor;
+    this.newUser.tipoVeiculo = this.selectTipoCarro.value;
+    this.newUser.vgaEspecial = this.radioGroup.value;
     this.newUser.tipoUsuario = 'CONTA TEMPORARIA';
     this.newUser.isActivate = true;
-    let date = new Date();
-    console.log(date.toLocaleString()); 
-    this.newUser.create_at = date.toLocaleString();
+    this.date = new Date();
+    console.log(this.date.toLocaleString()); 
+    this.newUser.create_at = this.date.toLocaleString();
 
     this.storageService.getUser().then(async users => {
       console.log(users);
@@ -102,24 +100,23 @@ export class LoginSemUsuarioPage implements OnInit {
           //console.log(res);
           const user = await this.authService.onRegister(email, senha);
           console.log(user);
-          console.log(user.__proto__);
-          console.log(user.__proto__.__proto__.name);
-          console.log(user.code);
-          
-          if(user.__proto__.__proto__.name === "Error"){
-            if(user.code === "auth/invalid-email"){
+          //console.log(user.__proto__);
+          //console.log(user.__proto__.constructor.name);
+          //console.log(user.code);
+          //if(user.__proto__.__proto__.constructor.name === "Error"){
+            if(user === "auth/invalid-email"){
               console.log("auth/invalid-email");
               return this.showToast("EMAIL INVALIDO");
             }
-            else if(user.code  === "auth/weak-password"){
+            else if(user  === "auth/weak-password"){
               console.log("auth/weak-password");
               return this.showToast("SENHA MUITO FRACA, ACIMA DE 6 CARACTERES");
             }
-            else if(user.code  === "auth/email-already-in-use"){
+            else if(user  === "auth/email-already-in-use"){
               return this.showToast("EMAIL JA ESTA EM USO");
             }
-          }
-          else{
+          //}
+          //else{
             console.log("usuario criado com sucesso");
           
           this.createUserFirebase(this.newUser);
@@ -129,20 +126,28 @@ export class LoginSemUsuarioPage implements OnInit {
             this.loadUsers();
           }).catch(error => {
             console.log("Erro De Adicionar Usuario"+error);
+            return error;
           });
           this.router.navigateByUrl('/');
 
-          }
+          //}
         } catch (error) {
-          console.log("Erro Do Auth Firebase "+error);
+          console.log("Erro Do Try Catch "+error);
+          return error;
         }
       }else if(users.length >= 1){
-        this.showToast('JA POSSUI UMA CONTA TEMPORARIA CADASTRADA NO DISPOSITIVO');
+        return this.showToast('JA POSSUI UMA CONTA TEMPORARIA CADASTRADA NO DISPOSITIVO');
       }
     }).catch(error => {
       console.log("Erro Do GetUser "+error);
+      return error;
     });
+
+    //this.addUser(form.value.nome, form.value.celular, form.value.email, form.value.senha, form.value.placa, form.value.modelo, form.value.chassi, form.value.proprietario, form.value.marca, form.value.cor, this.selectTipoCarro.value, this.radioGroup.value, email, senha);
   }
+
+  /*addUser(nome: string, celular:string, email:string, senha:string, placa:string, modelo: string, chassi:string, proprietario:string, marca:string, cor:string, tipoVeiculo: string, vagaEspecial: string, emailAtuh: string, senhaAuth: string){
+  }*/
 
   loadUsers(){
     this.storageService.getUser().then(users => {
