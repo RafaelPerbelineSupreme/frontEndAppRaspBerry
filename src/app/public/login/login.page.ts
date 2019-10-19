@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 //import { IonRadioGroup } from '@ionic/angular';
-import { StorageService } from '../../services/storage.service';
-import { ContaTemporariaService } from '../../services/conta-temporaria.service';
+/*import { StorageService } from '../../services/storage.service';
+import { ContaTemporariaService } from '../../services/conta-temporaria.service';*/
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,7 @@ export class LoginPage implements OnInit {
 
   //@ViewChild(IonRadioGroup, {static: false}) radioGroup: IonRadioGroup
 
-  constructor(private contaTemporariaService: ContaTemporariaService, private storageService: StorageService, private authService: AuthService, private router: Router, private toastController: ToastController) { }
+  constructor(/*private contaTemporariaService: ContaTemporariaService, private storageService: StorageService, */private authService: AuthService, private router: Router, private toastController: ToastController) { }
 
   ngOnInit() {
   }
@@ -31,16 +31,13 @@ export class LoginPage implements OnInit {
     else if(this.radioGroup.value === "ADM" || this.radioGroup.value === "GRT"){
       console.log("ADM || GRT")
     }*/
-    this.storageService.getUser().then(async users => {
+    /*this.storageService.getUser().then(async users => {
       if (users === null || users === undefined || !users){
         console.log("storage não existe");
-        let userEmail = await this.contaTemporariaService.getUsuariosEmail(form.value.usuario).toPromise(userEmail => {
-          console.log(userEmail);
-        });
         
-      }
-      else{
-        console.log("storage existe " + users);
+      }*/
+      //else{
+        //console.log("storage existe " + users);
         const user = await this.authService.onLogin(form.value.usuario, form.value.senha)
         console.log(user);
         if(user === "auth/invalid-email"){
@@ -56,10 +53,10 @@ export class LoginPage implements OnInit {
     
         this.showToast("Login Realizado com Sucesso!!!");
         this.router.navigateByUrl('/tabs/homepage');
-      }
-    }).catch(error => {
+      //}
+    /*}).catch(error => {
       console.log(error);
-    });
+    });*/
   }
 
   async showToast(msg){

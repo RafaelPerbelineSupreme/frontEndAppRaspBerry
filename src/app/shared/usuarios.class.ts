@@ -3,6 +3,7 @@ export class Usuarios {
     nome: string;
     celular: string;
     email: string;
+    cpf: string;
     senha: string;
     vgaEspecial: string;
     plano: string;
@@ -16,4 +17,14 @@ export class Usuarios {
     isActivate: boolean;
     tipoVeiculo: string;
     create_at: string;
+}
+
+export class Vaga {
+    id: number;
+    nome: string;
+    preco: number;
+    disponibilidade: string;
+    localização: string;
+    funcionamento: string;
+    planos: string;
 }

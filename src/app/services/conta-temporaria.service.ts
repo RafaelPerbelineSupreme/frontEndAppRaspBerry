@@ -39,7 +39,17 @@ export class ContaTemporariaService {
   }
 
   getUsuariosEmail(email) {
-    return this.db.collection<Usuarios>("usuarios", ref => ref.where('email', '==', email).where('isActivate', '==', 'true')).valueChanges();
+    this.usuariosCollection = this.db.collection<Usuarios>("usuarios", ref => ref.where('email', '==', email).where('isActivate', '==', 'true'));
+    this.usuarios = this.usuariosCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+    return this.usuarios;
   }
  
   updateUsuarios(usuarios: Usuarios, id: string) {

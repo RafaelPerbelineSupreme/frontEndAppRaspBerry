@@ -85,6 +85,7 @@ export class LoginSemUsuarioPage implements OnInit {
     this.newUser.tipoVeiculo = this.selectTipoCarro.value;
     this.newUser.vgaEspecial = this.radioGroup.value;
     this.newUser.tipoUsuario = 'CONTA TEMPORARIA';
+    this.newUser.cpf = '';
     this.newUser.isActivate = true;
     this.date = new Date();
     console.log(this.date.toLocaleString()); 
